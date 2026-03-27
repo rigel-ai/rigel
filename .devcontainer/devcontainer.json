@@ -1,0 +1,25 @@
+{
+    "name": "Rigel Development",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "remoteUser": "rigel",
+    "containerUser": "rigel",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+    "workspaceFolder": "/workspace",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.debugpy"
+            ],
+            "settings": {
+                "python.testing.pytestEnabled": true,
+                "python.testing.pytestArgs": ["tests"]
+            }
+        }
+    },
+    "postCreateCommand": "pip install --user -e '.[dev]' 2>/dev/null; pip install --user -e . && pip install --user pytest",
+    "features": {}
+}
